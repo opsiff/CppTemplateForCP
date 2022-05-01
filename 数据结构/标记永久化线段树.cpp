@@ -1,3 +1,5 @@
+// 支持询问区间最大、最小、区间和、区间加
+// 时间复杂度: O(log n)
 typedef double db;//类型 
 struct node{// min max sum 不需要的直接删去
 	db tag,sum;//加标记和差分区间和 表示这个区间以下的区间和 
@@ -28,4 +30,10 @@ function<db(int,int,int,db)>qmax=[&](int p,int l,int r,db val)->db{
     int mid=(l+r)>>1;//带标记下传
     return max(qmax(p*2,l,mid,S[p].tag+val),
     qmax(p*2+1,mid+1,r,S[p].tag+val));//左边右边 
+};
+function<db(int,int,int,db)>qsum=[&](int p,int l,int r,db val)->db{
+    if(x>r||y<l) return 0;
+    if(x<=l&&r<=y)	return S[p].sum+(r-l+1)*val;//区间和 + 加标记 * 区间长度
+    int mid=(l+r)>>1;//带标记下传
+    return qsum(p*2,l,mid, S[p].tag+val)+qsum(p*2+1,mid+1,r,S[p].tag+val);
 };
