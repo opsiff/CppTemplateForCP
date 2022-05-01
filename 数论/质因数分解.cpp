@@ -10,11 +10,10 @@ vector<pii> fact(int n){
 	}
 	return res;
 }
-// 配合 prime.cpp 使用筛出到 根号n 的线性筛素数
-// 时间复杂度: O(n/log n)
-using vpii=vector<pii>;
-vpii solve(int x){
-	vpii p;
+// 配合 prime.cpp 使用筛出到 根号n 的线性筛素数初始化 primelist 数组
+// 时间复杂度: O( sqrt(n)/log n)
+vector<pii> fact(int x){
+	vector<pii> p;
 	for(auto i:primelist){
 		if(i*i>x) break;
 		if(x%i==0){
